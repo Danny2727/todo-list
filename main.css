@@ -1,0 +1,13 @@
+:root{
+    --primary: #EA40A4;
+    --business: #3A83EE;
+    --personal: var(primary);
+    --light: #EEE;
+    --dark: #313154;
+    --danger: #ff5b57;
+
+    --shadow: 0 1px 3px rgbd(0, 0, 0, 0.1);
+
+    --business-glow: 0px 0px 4px rgba(58, 130, 238, 0.75);
+    --perosnal-glow: 0px, 0px, 4px rgba(234, 64, 164, 0.75);
+}
