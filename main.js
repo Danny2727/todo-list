@@ -1,13 +1,13 @@
 window.addEventListener('load', () => {
     todos = JSON.parse(localStorage.getItem('todos')) || [];
-    const nameInput = document.getElementById('#name');
-    const newTodoForm = document.getElementById('#new-todo-form');
+    const nameInput = document.querySelector('#name');
+    const newTodoForm = document.querySelector('#new-todo-form');
 
-    const username = localStorage.getItem('username');
+    const username = localStorage.getItem('username') || '';
 
     nameInput.value = username;
 
-    nameInput.addEventListener('input', e => {
+    nameInput.addEventListener('change', e => {
         localStorage.setItem('username', e.target.value);
     });
 
@@ -15,8 +15,8 @@ window.addEventListener('load', () => {
         e.preventDefault();
 
         const todo = {
-            content: e.target.elements['content'].value,
-            category: e.target.elements['category'].value,
+            content: e.target.elements.content.value,
+            category: e.target.elements.category.value,
             done: false,
             createdAt: new Date().getTime()
         }
@@ -27,7 +27,6 @@ window.addEventListener('load', () => {
 
         e.target.reset();
 
-
         DisplayTodos();
 
 
@@ -35,7 +34,7 @@ window.addEventListener('load', () => {
 })
 
 function DisplayTodos() {
-    const todoList = document.getElementById('#todo-list');
+    const todoList = document.querySelector('#todo-list');
     todoList.innerHTML = '';
 
     todos.forEach((todo) => {
@@ -52,21 +51,21 @@ function DisplayTodos() {
 
         input.type = 'checkbox';
         input.checked = todo.done;
-        span.classList.add('bublle');
+        span.classList.add('bubble');
 
-        if (todo.category === "personal") {
+        if (todo.category == "personal") {
             span.classList.add('personal');
-        } else{
+        } else {
             span.classList.add('business');
         }
 
         content.classList.add('todo-content');
         actions.classList.add('actions');
-        edit.classList.add('edit'); 
-        deleteBtn.classList.add('delete'); 
+        edit.classList.add('edit');
+        deleteBtn.classList.add('delete');
 
 
-        content.innerHTML = `input type="text" value="${todo.content}" readonly`;
+        content.innerHTML = `<input type="text" value="${todo.content}" readonly>`;
         edit.innerHTML = 'Edit';
         deleteBtn.innerHTML = 'Delete';
 
@@ -80,16 +79,15 @@ function DisplayTodos() {
 
         todoList.appendChild(todoItem);
 
-        if(todo.done){
+        if (todo.done) {
             todoItem.classList.add('done');
         }
 
         input.addEventListener('click', e => {
             todo.done = e.target.checked;
             localStorage.setItem('todos', JSON.stringify(todos));
-            DisplayTodos();
 
-            if(todo.done){
+            if (todo.done) {
                 todoItem.classList.add('done');
             } else {
                 todoItem.classList.remove('done');
@@ -97,8 +95,28 @@ function DisplayTodos() {
 
 
             DisplayTodos();
-    
-    });
+
+        })
+
+        edit.addEventListener('click', e => {
+            const input = content.querySelector('input');
+            input.removeAttribute('readonly', true);
+            input.focus();
+            input.addEventListener('blur', e => {
+                input.setAttribute('readonly', true);
+                todo.content = e.target.value
+                localStorage.setItem('todos', JSON.stringify(todos));
+                DisplayTodos();
+            })
+        })
+
+        deleteBtn.addEventListener('click', e => {
+            todos = todos.filter(t => t !== todo);
+            localStorage.setItem('todos', JSON.stringify(todos));
+            DisplayTodos();
+        })
+    })
+
 }
 
 
