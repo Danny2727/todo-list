@@ -1,4 +1,4 @@
-:root{
+:root {
     --primary: #EA40A4;
     --business: #3A83EE;
     --personal: var(--primary);
@@ -14,14 +14,15 @@
 }
 
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'carasimo', sans-serif;
 }
 
-input:not([type="radio"]):not([type="checkbox"]), button {
+input:not([type="radio"]):not([type="checkbox"]),
+button {
     appearance: none;
     border: none;
     outline: none;
@@ -34,7 +35,7 @@ body {
     color: var(--dark);
 }
 
-section{ 
+section {
     margin-top: 2rem;
     margin-bottom: 2rem;
     padding-left: 1.5rem;
@@ -49,14 +50,14 @@ h3 {
 }
 
 h4 {
-color: var(--grey);
-font-size: 0.875rem;
-font-weight: 700;
-margin-bottom: 0.5rem;
+    color: var(--grey);
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
 }
 
-.greeting .title input{
-    margin-left: 0.5rem ;
+.greeting .title input {
+    margin-left: 0.5rem;
     flex: 1 1 0%;
     min-width: 0;
 }
@@ -83,21 +84,87 @@ margin-bottom: 0.5rem;
 
 
 .create-todo .options {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 1rem;
-margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .create-todo .options label {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 1.5rem;
-background-color: #FFF;
-border-radius: 0.5rem;
-box-shadow: var(--shadow);
-cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background-color: #FFF;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+    cursor: pointer;
 }
 
+input[type="radio"],
+input[type="checkbox"] {
+    display: none;
+}
+
+.bubble {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--business);
+    box-shadow: var(--business-glow);
+}
+
+.bubble.personal {
+    border-color: var(--personal);
+    box-shadow: var(--perosnal-glow);
+}
+
+.bubble::after {
+    content: " ";
+    display: block;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    background-color: var(--business);
+    box-shadow: var(--business-glow);
+    border-radius: 50%;
+    transition: 0.2 ease-in-out;
+}
+
+.bubble.bubble.personal::after {
+    background-color: var(--personal);
+    box-shadow: var(--perosnal-glow);
+}
+
+input:checked~.bubble::after {
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+}
+
+.create-todo .options label div {
+    color: var(--dark);
+    font-size: 1.125rem;
+    margin-top: 1rem;
+}
+
+.create-todo input[type="submit"] {
+    display: block;
+    width: 100%;
+    font-size: 1.125rem;
+    padding: 1rem 1.5rem;
+    color: #FFF;
+    background-color: var(--primary);
+    border-radius: 0.5rem;
+    box-shadow: var(--perosnal-glow);
+    cursor: pointer;
+    transition: 0.2 ease-in-out;
+}
+
+.create-todo input[type="submit"]:hover {
+    opacity: 0.75;
+}
