@@ -63,8 +63,41 @@ margin-bottom: 0.5rem;
 
 .greeting .title,
 .greeting .title input {
-    colot: var(--dark);
+    color: var(--dark);
     font-size: 1.5rem;
     font-weight: 700;
+}
+
+
+.create-todo input[type="text"] {
+    display: block;
+    width: 100%;
+    font-size: 1.125rem;
+    padding: 1rem 1.5rem;
+    color: var(--dark);
+    background-color: #FFF;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+}
+
+
+.create-todo .options {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 1rem;
+margin-bottom: 1.5rem;
+}
+
+.create-todo .options label {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 1.5rem;
+background-color: #FFF;
+border-radius: 0.5rem;
+box-shadow: var(--shadow);
+cursor: pointer;
 }
 
