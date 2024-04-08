@@ -96,8 +96,7 @@ function DisplayTodos() {
             }
 
 
-            DisplayTodos
-
+            DisplayTodos();
     
     });
 }
